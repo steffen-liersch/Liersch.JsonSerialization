@@ -41,8 +41,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Liersch.Json\Liersch.Json\Liersch.Json.csproj" />
-    <ProjectReference Include="..\..\Liersch.Reflection\Liersch.Reflection\Liersch.Reflection.csproj" />
+    <PackageReference Include="Liersch.Json" Version="2.0.0-beta-363581589" />
+    <PackageReference Include="Liersch.Reflection" Version="1.0.0-beta-363252653" />
   </ItemGroup>
 
 </Project>
