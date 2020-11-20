@@ -6,9 +6,9 @@
 
 The library supports the following .NET platforms:
 
-- ab .NET Framework 2.0
-- ab .NET Core 2.0
-- ab .NET Standard 2.1
+- from .NET Framework 2.0
+- from .NET Core 2.0
+- from .NET Standard 2.1
 - Mono
 
 All major changes are logged in the [CHANGELOG.md](https://github.com/steffen-liersch/Liersch.JsonSerialization/blob/main/CHANGELOG.md) file.
