@@ -15,7 +15,7 @@ All major changes are logged in the [CHANGELOG.md](https://github.com/steffen-li
 
 ## Getting Started
 
-The easiest and the fastest way to integrate the library into a project is to use the [Liersch.JsonSerialization package published on NuGet](https://www.nuget.org/packages/Liersch.JsonSerialization). For older projects (before .NET Framework 4.0) the library and its dependent libraries has to be compiled and integrated manually.
+The easiest and the fastest way to integrate the library into a project is to use the [Liersch.JsonSerialization package published on NuGet](https://www.nuget.org/packages/Liersch.JsonSerialization). For older projects (before .NET Framework 4.0) the library and its dependent libraries have to be compiled and integrated manually.
 
 ## JsonSerializer and JsonDeserializer
 
