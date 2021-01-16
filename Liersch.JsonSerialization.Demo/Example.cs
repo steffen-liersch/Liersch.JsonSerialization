@@ -1,6 +1,6 @@
 ﻿/*--------------------------------------------------------------------------*\
 ::
-::  Copyright © 2013-2020 Steffen Liersch
+::  Copyright © 2013-2021 Steffen Liersch
 ::  https://www.steffen-liersch.de/
 ::
 \*--------------------------------------------------------------------------*/
@@ -14,8 +14,8 @@ namespace Liersch.Json
   {
     public static void Run()
     {
-      Console.WriteLine("Reflection-based Example");
-      Console.WriteLine("========================");
+      Console.WriteLine("Liersch.JsonSerialization Example");
+      Console.WriteLine("=================================");
       Console.WriteLine();
 
       var c1=new Container();
