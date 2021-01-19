@@ -1,6 +1,6 @@
 ﻿/*--------------------------------------------------------------------------*\
 ::
-::  Copyright © 2013-2020 Steffen Liersch
+::  Copyright © 2013-2021 Steffen Liersch
 ::  https://www.steffen-liersch.de/
 ::
 \*--------------------------------------------------------------------------*/
@@ -15,6 +15,18 @@ namespace Liersch.Json
 {
   public sealed class JsonSerializer
   {
+    public bool IncludeNullValues { get; set; }
+
+    public bool UseExactMemberTypeOnly { get; set; }
+
+
+    public JsonSerializer()
+    {
+      IncludeNullValues=true;
+      UseExactMemberTypeOnly=true;
+    }
+
+
     public void RegisterConverter(Type type, JsonConverter<object, string> converter)
     {
       if(type==null)
@@ -43,14 +55,21 @@ namespace Liersch.Json
 
     public void Serialize<T>(T instance, JsonWriter writer)
     {
-      SerializeValue(writer, instance, typeof(T));
+      SerializeValue(writer, instance, RetrieveType(instance));
     }
 
     public string Serialize<T>(T instance)
     {
       var wr=new JsonWriter();
-      SerializeValue(wr, instance, typeof(T));
+      SerializeValue(wr, instance, RetrieveType(instance));
       return wr.ToString();
+    }
+
+    Type RetrieveType<T>(T instance)
+    {
+      if(UseExactMemberTypeOnly)
+        return typeof(T);
+      return instance!=null ? instance.GetType() : typeof(object);
     }
 
 
@@ -67,10 +86,9 @@ namespace Liersch.Json
 
       foreach(object v in values)
       {
-        // Use the element type of the collection here!
         if(v==null)
           SerializeNull(writer, elementType);
-        else SerializeValue(writer, v, elementType);
+        else SerializeValue(writer, v, UseExactMemberTypeOnly ? elementType : v.GetType());
       }
 
       writer.EndArray();
@@ -93,14 +111,15 @@ namespace Liersch.Json
 
     void SerializeProperty(JsonWriter writer, object instance, string name, JsonTypeMemberEntry memberEntry)
     {
-      writer.BeginField(name, memberEntry.IsEscapingRequired);
-
       object value=memberEntry.ReadValue(instance);
+      if(value!=null || IncludeNullValues)
+      {
+        writer.BeginField(name, memberEntry.IsEscapingRequired);
 
-      // Use the member type here!
-      if(value==null)
-        SerializeNull(writer, memberEntry.MemberType);
-      else SerializeValue(writer, value, memberEntry.MemberType);
+        if(value==null)
+          SerializeNull(writer, memberEntry.MemberType);
+        else SerializeValue(writer, value, UseExactMemberTypeOnly ? memberEntry.MemberType : value.GetType());
+      }
     }
 
 
