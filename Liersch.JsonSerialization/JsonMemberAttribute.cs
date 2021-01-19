@@ -1,6 +1,6 @@
 ﻿/*--------------------------------------------------------------------------*\
 ::
-::  Copyright © 2013-2020 Steffen Liersch
+::  Copyright © 2013-2021 Steffen Liersch
 ::  https://www.steffen-liersch.de/
 ::
 \*--------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ using System;
 namespace Liersch.Json
 {
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-  public sealed class JsonMemberAttribute : Attribute
+  public class JsonMemberAttribute : Attribute
   {
     public string MemberName { get; private set; }
 
