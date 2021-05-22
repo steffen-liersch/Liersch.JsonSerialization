@@ -167,6 +167,26 @@ namespace Liersch.Json
 
     static DeserializerDelegate RetrieveDeserializer2(Type type)
     {
+      if(type.IsEnum)
+      {
+        Array values=Enum.GetValues(type);
+        var dict=new Dictionary<string, object>(values.Length);
+        foreach(object v in values)
+          dict.Add(v.ToString(), v);
+
+        return (JsonDeserializer deserializer, JsonTokenizer tokenizer, out object value) =>
+        {
+          if(tokenizer.TokenIsString && dict.TryGetValue(tokenizer.Token, out value))
+            return true;
+          else
+          {
+            tokenizer.SkipValueBody();
+            value=null;
+            return false;
+          }
+        };
+      }
+
       if(type.IsArray)
       {
         if(type.GetArrayRank()!=1)

@@ -80,6 +80,13 @@ namespace Liersch.Json
       else RetrieveSerializer(type)(this, writer, value);
     }
 
+    void SerializeEnum(JsonWriter writer, object value)
+    {
+      if(value==null)
+        writer.WriteValueNull();
+      else writer.WriteValue(value.ToString());
+    }
+
     void SerializeArray(JsonWriter writer, IEnumerable values, Type elementType)
     {
       writer.BeginArray();
@@ -143,6 +150,9 @@ namespace Liersch.Json
 
     static SerializerDelegate RetrieveSerializer2(Type type)
     {
+      if(type.IsEnum)
+        return (s, w, v) => s.SerializeEnum(w, v);
+
       if(type.IsArray)
       {
         if(type.GetArrayRank()!=1)

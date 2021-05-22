@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 ### Added
-- ...
+- Enum support
 ### Changed
 - ...
 ### Fixed
