@@ -1,6 +1,6 @@
 ﻿/*--------------------------------------------------------------------------*\
 ::
-::  Copyright © 2013-2020 Steffen Liersch
+::  Copyright © 2013-2021 Steffen Liersch
 ::  https://www.steffen-liersch.de/
 ::
 \*--------------------------------------------------------------------------*/
@@ -175,8 +175,17 @@ namespace Liersch.Json
         Type et=type.GetElementType();
         return (JsonDeserializer deserializer, JsonTokenizer tokenizer, out object value) =>
         {
-          value=deserializer.DeserializeArray(tokenizer, et);
-          return true;
+          if(tokenizer.SpecialChar=='[')
+          {
+            value=deserializer.DeserializeArray(tokenizer, et);
+            return true;
+          }
+          else
+          {
+            tokenizer.SkipValueBody();
+            value=null;
+            return false;
+          }
         };
       }
 
@@ -235,9 +244,18 @@ namespace Liersch.Json
 
       return (JsonDeserializer deserializer, JsonTokenizer tokenizer, out object value) =>
       {
-        value=create();
-        deserializer.DeserializeObject(tokenizer, value, cache);
-        return true;
+        if(tokenizer.SpecialChar=='{')
+        {
+          value=create();
+          deserializer.DeserializeObject(tokenizer, value, cache);
+          return true;
+        }
+        else
+        {
+          tokenizer.SkipValueBody();
+          value=null;
+          return false;
+        }
       };
     }
 
