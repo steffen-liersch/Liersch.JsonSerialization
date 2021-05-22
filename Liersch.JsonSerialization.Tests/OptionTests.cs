@@ -13,6 +13,24 @@ namespace Liersch.Json.Tests
   public class OptionTests
   {
     [TestMethod]
+    public void TestGeneral()
+    {
+      var a=new Container
+      {
+        X="abc",
+        Y=123,
+        Z=new object()
+      };
+
+      string json=new JsonSerializer().Serialize(a);
+      Container b=new JsonDeserializer().Deserialize<Container>(json);
+
+      Assert.AreEqual(a.X, b.X);
+      Assert.AreEqual(a.Y, b.Y);
+      Assert.IsNotNull(b.Z);
+    }
+
+    [TestMethod]
     public void TestClassWithDifferentOptions()
     {
       var c=new Container();
