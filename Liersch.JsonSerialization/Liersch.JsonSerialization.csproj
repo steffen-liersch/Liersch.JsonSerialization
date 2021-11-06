@@ -42,7 +42,7 @@
 
   <ItemGroup>
     <PackageReference Include="Liersch.Json" Version="2.0.0" />
-    <PackageReference Include="Liersch.Reflection" Version="1.0.0-beta-363252653" />
+    <PackageReference Include="Liersch.Reflection" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
