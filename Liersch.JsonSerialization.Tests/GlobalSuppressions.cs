@@ -7,3 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Style", "IDE0017:Simplify object initialization")]
 [assembly: SuppressMessage("Style", "IDE0028:Simplify collection initialization")]
+[assembly: SuppressMessage("Style", "IDE0057:Use range operator")]
