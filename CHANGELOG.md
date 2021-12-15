@@ -5,12 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Added
-- ...
-### Changed
-- ...
 ### Fixed
-- ...
+- Update referenced package to fix overflow in the case of int.MinValue
 
 ## [2.0.0] - 2021-11-06
 ### Added
